@@ -1,17 +1,27 @@
-var request = require("request");
+const autobahn = require('autobahn')
+const wsuri = 'wss://api.poloniex.com'
+const connection = new autobahn.Connection({
+  url: wsuri,
+  realm: 'realm1',
+  initial_retry_delay: 0.25,
+  retry_delay_growth: 0.25
+})
 
-var options = 
-{ 
-  method: 'GET',
-  url: 'https://api.upbit.com/v1/ticker',
-  qs: { markets: 'KRW-BTC' } 
+connection.onopen = (session) => {
+  console.log('connected')
+  const marketEvent = (args, kwargs) => {
+    console.log('marketEvent', args)
+  }
+  const tickerEvent = (args, kwargs) => {
+    console.log('ticker:', args)
+  }
+
+  session.subscribe('BTC_ETH', marketEvent)
+  session.subscribe('ticker', tickerEvent)
 }
 
+connection.onclose = () => {
+  console.log('websocket connection is closed')
+}
 
-setInterval( ()=>{
-  request(options, function (error, response, body) {
-    if (error) throw new Error(error);
-  
-    console.log(body);
-  })
-}, 2*1000)
+connection.open();
