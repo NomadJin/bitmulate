@@ -1,7 +1,7 @@
 const currencyPairMap = require('./currencyPairMap')
 const axios = require('axios')
 
-moudule.exports = (function () {
+module.exports = (function () {
     return {
         getCurrencyPairName(id) {
             return currencyPairMap[id.toString()]

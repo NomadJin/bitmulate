@@ -22,7 +22,7 @@
     "nodemon": "^1.18.4"
   },
   "scripts": {
-    "start:dev": "NODE_PATH=./src nodemon --watch src/ src/index.js",
-    "crawler:dev": "NODE_PATH=./src nodemon --watch src/crawler/ src/crawler/index.js"
+    "start:dev": "nodemon --watch src/ src/index.js",
+    "crawler:dev": "nodemon --watch src/crawler/ src/crawler/index.js"
   }
 }
