@@ -5,7 +5,7 @@
   "author": "jin",
   "license": "MIT",
   "dependencies": {
-    "autobahn": "^18.3.2",
+    "axios": "^0.18.0",
     "dotenv": "^6.0.0",
     "koa": "^2.5.3",
     "koa-router": "^7.4.0",
@@ -22,6 +22,7 @@
     "nodemon": "^1.18.4"
   },
   "scripts": {
-    "start:dev": "nodemon --watch src/ src/index.js"
+    "start:dev": "NODE_PATH=./src nodemon --watch src/ src/index.js",
+    "crawler:dev": "NODE_PATH=./src nodemon --watch src/crawler/ src/crawler/index.js"
   }
 }
