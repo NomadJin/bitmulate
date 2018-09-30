@@ -1,15 +1,19 @@
 require('dotenv').config();
 
+// load env var
+const {
+    PORT: port,
+    MONGODB_URI: mongodbURI
+} = process.env
+
 const Koa = require('koa');
 const Router = require('koa-router')
 
 const api = require('./api')
-const app = new Koa()
+const db = require('./db')
 
-// load env var
-const {
-    PORT: port
-} = process.env
+db.connect()
+const app = new Koa()
 
 const router = new Router()
 router.use('/api', api.routes())
