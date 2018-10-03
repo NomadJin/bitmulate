@@ -1,0 +1,1 @@
+exports.parseJSON = require('./parseJSON')

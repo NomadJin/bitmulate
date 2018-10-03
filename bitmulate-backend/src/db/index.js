@@ -10,7 +10,7 @@ module.exports = (function () {
 
     return {
         connect () {
-            mongoose.connect(mongodbURI).then( () => {
+            mongoose.connect(mongodbURI, {useNewUrlParser:true}).then( () => {
                 console.log('Successfully connected to mongodb')
             }
             ).catch( e => {
