@@ -11,7 +11,6 @@ const PageTemplate = ({header, children, responsive}) => {
                 {header}
             </header>
             <main className={cx('content', {
-                'has-header': header, // if there is a header, gives 3.5 padding to top
                 responsive
             })}>    
                 {children}
