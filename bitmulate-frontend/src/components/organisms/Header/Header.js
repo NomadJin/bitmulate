@@ -12,6 +12,9 @@ const Header = () => {
                 <div className={cx('logo-wrapper')}>
                     <Logo/>
                 </div>
+                <div className={cx('right-side')}>
+                    나눔스퀘어?? 이상하게 적용이 되는것같은데
+                </div>
             </div>
         </div>
     )

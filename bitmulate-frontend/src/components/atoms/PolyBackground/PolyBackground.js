@@ -34,8 +34,8 @@ class PolyBackground extends Component {
     }
 
     render() {
-        const { loaded } = this.state
-        const { children, fixed, half, home } = this.props
+        //const { loaded } = this.state
+        //const { children, fixed, half, home } = this.props
 
         return (
             <div className={cx('poly-background')}>

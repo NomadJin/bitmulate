@@ -2,6 +2,8 @@
 
 .header {
     height: 3.5rem;
+    display: flex;
+    flex-direction: row;
     
     .responsive {
         padding-left: 1rem;
@@ -10,5 +12,10 @@
         display: flex;
         height: 100%;
         align-items: center;
+
+        .right-side {
+            margin-left: auto;
+        }
     }
+
 }
