@@ -1,5 +1,5 @@
 import React from 'react'
-import { PageTemplate, Header, PolyBackground } from '../../index'
+import { PageTemplate, Header, PolyBackground, Block } from '../../index'
 //import styles from './HomePage.scss';
 //import classNames from 'classnames/bind'
 
@@ -10,6 +10,14 @@ const HomePage = () => {
         <PageTemplate
             header={<Header/>}>
             <PolyBackground>
+                <Block  center shadow>
+                    <h1>
+                        모의 거래소에서 다양한 가상화폐 거래를 해보세요.
+                    </h1>
+                    <h2>
+                        실제 거래소의 실시간 데이터에 기반하여 거래가 진행됩니다.
+                    </h2>
+                </Block> 
             </PolyBackground>
         </PageTemplate>
     )

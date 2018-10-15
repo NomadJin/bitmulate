@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Header.scss'
 import classNames from 'classnames/bind'
-import { Logo } from '../../index'
+import { Logo, HeaderNav, Button } from '../../index'
 
 const cx = classNames.bind(styles)
 
@@ -13,7 +13,8 @@ const Header = () => {
                     <Logo/>
                 </div>
                 <div className={cx('right-side')}>
-                    나눔스퀘어?? 이상하게 적용이 되는것같은데
+                    <HeaderNav/>
+                    <Button invert className={cx('login-button')}>로그인</Button>
                 </div>
             </div>
         </div>

@@ -1,12 +1,13 @@
 import React from 'react'
+import styles from './NavItem.scss'
 import classNames from 'classnames/bind'
 
-const cx = classNames.bind()
+const cx = classNames.bind(styles)
 
-const NavItem = () => {
+const NavItem = ({children}) => {
     return (
-        <div className={cx('responsive')}>
-
+        <div className={cx('nav-item')}>
+            {children}
         </div>
     )
 }
