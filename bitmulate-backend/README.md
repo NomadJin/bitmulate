@@ -6,3 +6,6 @@
  - Mongoose
  - Websocket
 - MongoDB
+
+`yarn start:dev`
+`yart crawler:dev`
