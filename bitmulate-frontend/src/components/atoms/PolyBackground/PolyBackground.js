@@ -10,7 +10,7 @@ class PolyBackground extends Component {
         loaded: false
     }
 
-    componentWillMout() {
+    componentWillMount() {
         const image = new Image()
         image.src = background
 
@@ -24,14 +24,15 @@ class PolyBackground extends Component {
 
         image.onload = () => {
             this.setSate({
-                loaded:true
+                loaded: true
             })
         }
-
     }
+
     componentDidMount() {
-
+      
     }
+    
 
     render() {
         const { loaded } = this.state

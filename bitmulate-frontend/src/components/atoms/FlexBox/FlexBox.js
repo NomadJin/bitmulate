@@ -9,7 +9,8 @@ const FlexBox = ({row, column, className, children, ...rest}) => {
         <div className={cx('flex-box', {
             row,
             column
-        }, className)} {...rest}>
+        }, className)} 
+        {...rest}>
             { children }
         </div>
     )
