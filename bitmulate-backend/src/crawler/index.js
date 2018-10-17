@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const poloniex = require('../lib/poloniex')
 const db = require('../db')
-const ExchangeRate = require('../db/model/ExchangeRate')
+const ExchangeRate = require('../db/models/ExchangeRate')
 const socket = require('./socket')
 const { parseJSON } = require('../lib/common')
 
