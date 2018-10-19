@@ -88,12 +88,19 @@ exports.locaLogin = async (ctx) => {
 
         const validated = user.validatePassword(password)
         if(!validated) {
+            //wrong password
             ctx.status = 403
             return
         }
 
+        const accessToken = await user.generateToken()
 
-    } catch(e) {
-        ctx.throw(500)
+        ctx.cookies.set('access_token', accessToken, { 
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24 * 7
+        })
+
+    } catch (e) {
+        ctx.throw(e)
     }
 }

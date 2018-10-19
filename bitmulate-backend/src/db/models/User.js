@@ -70,7 +70,7 @@ User.methods.generateToken = function() {
             _id,
             displayName
         }
-    })
+    }, 'user')
 }
 
 module.exports = mongoose.model('User', User)
