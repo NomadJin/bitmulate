@@ -43,13 +43,7 @@ exports.localRegister = async (ctx) => {
         })
 
         ctx.body = user
-
-        const accessToken = await token.generateToken({
-            user: {
-                _id: user._id,
-                displayName
-            }
-        }, 'user')
+        const accessToken = await user.generateToken()
         
         //configuration accessToken to httpOnly cookie
         ctx.cookies.set('access_token', accessToken, {
@@ -60,6 +54,46 @@ exports.localRegister = async (ctx) => {
         console.log(accessToken)
 
     } catch (e) {
+        ctx.throw(500)
+    }
+}
+
+exports.locaLogin = async (ctx) => {
+    
+    const { body } = ctx.request
+
+    const schema = Joi.object({
+        displayName: Joi.string().regex(/^[a-zA-Z0-9ㄱ-힣]{3,10}$/),
+        email: Joi.string().email().required(),
+        password: Joi.string().min(6).max(30)
+    })
+
+    const result = Joi.validate(body, schema)
+
+    if(!result.error) {
+        ctx.status = 400
+        return
+    }
+
+    const { email, password } = body
+
+    try {
+        //find user
+        const user = await User.findByEmail(email)
+        if(!user) {
+            //user does not exit
+            ctx.status = 403
+            return
+        }
+
+        const validated = user.validatePassword(password)
+        if(!validated) {
+            ctx.status = 403
+            return
+        }
+
+
+    } catch(e) {
         ctx.throw(500)
     }
 }
