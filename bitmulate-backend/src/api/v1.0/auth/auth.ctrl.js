@@ -42,7 +42,11 @@ exports.localRegister = async (ctx) => {
             displayName, email, password
         })
 
-        ctx.body = user
+        ctx.body = {
+            displayName,
+            _id: user._id,
+            metaInfo: user.metaInfo
+        }
         const accessToken = await user.generateToken()
         
         //configuration accessToken to httpOnly cookie
@@ -51,7 +55,7 @@ exports.localRegister = async (ctx) => {
             maxAge: 1000 * 60 * 60 * 24 * 7
         })
 
-        console.log(accessToken)
+        //console.log(accessToken)
 
     } catch (e) {
         ctx.throw(500)
@@ -70,7 +74,7 @@ exports.locaLogin = async (ctx) => {
 
     const result = Joi.validate(body, schema)
 
-    if(!result.error) {
+    if(result.error) {
         ctx.status = 400
         return
     }
@@ -100,7 +104,29 @@ exports.locaLogin = async (ctx) => {
             maxAge: 1000 * 60 * 60 * 24 * 7
         })
 
+        const { displayName, _id, metaInfo } = user
+        
+        ctx.body = {
+            displayName,
+            _id,
+            metaInfo
+        }
+
     } catch (e) {
         ctx.throw(e)
+    }
+}
+
+exports.check = (ctx) => {
+
+    const { user } = ctx.request
+
+    if(!user) {
+        ctx.stauts = 403
+        return
+    }
+
+    ctx.body = {
+        user
     }
 }
