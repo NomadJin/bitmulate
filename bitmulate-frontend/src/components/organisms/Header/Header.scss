@@ -2,8 +2,7 @@
 
 .header {
     height: 3.5rem;
-    display: flex;
-    flex-direction: row;
+    z-index: z-index-for('header');
     
     .responsive {
         padding-left: 1rem;
