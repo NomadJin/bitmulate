@@ -23,7 +23,7 @@ class PolyBackground extends Component {
         }
 
         image.onload = () => {
-            this.setSate({
+            this.setState({
                 loaded: true
             })
         }
