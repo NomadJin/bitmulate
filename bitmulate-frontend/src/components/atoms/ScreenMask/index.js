@@ -1,1 +1,1 @@
-export { ScreenMask } from './ScreenMask'
+export { default } from './ScreenMask'
