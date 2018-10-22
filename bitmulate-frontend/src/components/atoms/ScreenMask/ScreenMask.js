@@ -9,7 +9,7 @@ const ScreenMask = ({visible}) => {
 
     return (
         <div className={cx('screen-mask')}>
-           asdfg
+
         </div>
     )
 }
