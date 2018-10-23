@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './HeaderNav.scss'
 import classNames from 'classnames/bind'
-import { FlexBox, NavItem } from '../../index'
+import { FlexBox, NavItem } from '../../../components'
 
 const cx = classNames.bind(styles)
 

@@ -10,7 +10,7 @@ export const setScreenMaskVisibility = createAction(SET_SCREEN_MASK_VISIBILITY)
 // initial state
 const initialState = Map({
     screenMask: Map({
-        visible: true
+        visible: false
     })
 })
 

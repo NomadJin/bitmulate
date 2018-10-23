@@ -1,5 +1,6 @@
 import React from 'react'
-import { PageTemplate, Header, PolyBackground, Block } from '../../index'
+import { PageTemplate, PolyBackground, Block } from '../../../components'
+import { HeaderContainer } from '../../../containers'
 //import styles from './HomePage.scss';
 //import classNames from 'classnames/bind'
 
@@ -8,7 +9,7 @@ import { PageTemplate, Header, PolyBackground, Block } from '../../index'
 const HomePage = () => {
     return (
         <PageTemplate
-            header={<Header/>}>
+            header={<HeaderContainer/>}>
             <PolyBackground>
                 <Block  center shadow>
                     <h1>
