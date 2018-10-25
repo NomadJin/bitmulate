@@ -1,5 +1,5 @@
 import { createAction, handleActions } from 'redux-actions'
-import { Map, List } from 'immutable'
+import { Map } from 'immutable'
 
 // action type
 const SET_SCREEN_MASK_VISIBILITY = 'domain/SET_SCREEN_MASK_VISIBILITY'

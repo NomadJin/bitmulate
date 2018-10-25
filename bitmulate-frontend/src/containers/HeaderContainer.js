@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Header } from '../components'
-
+// import redux dependencies
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as baseActions from '../store/modules/base'

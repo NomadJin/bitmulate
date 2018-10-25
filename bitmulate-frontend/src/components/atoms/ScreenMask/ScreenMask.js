@@ -8,7 +8,7 @@ const cx = classNames.bind(styles)
 const ScreenMask = ({ visible }) => (
   <Transition in={visible} timeout={150}>
     {(state) => {
-        console.log(state)
+        //console.log(state)
         if(state === 'exited') return null
         return (
         <div className={cx(`fade-${state}`)}>
