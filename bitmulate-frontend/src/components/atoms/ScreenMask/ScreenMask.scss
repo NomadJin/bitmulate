@@ -1,14 +1,18 @@
 @import 'utils';
 
-.fade-enter {
-    animation-duration: .5s;
+.fade {
+    transition: all .3s;
+}
+
+.fade-entering {
+    animation-duration: .3s;
     animation-fill-mode: both;
     animation-timing-function: ease-in;
     animation-name: fadeIn;
 }
 
-.fade-exit {
-    animation-duration: .5s;
+.fade-exiting {
+    animation-duration: .3s;
     animation-fill-mode: both;
     animation-timing-function: ease-out;
     animation-name: fadeOut;
