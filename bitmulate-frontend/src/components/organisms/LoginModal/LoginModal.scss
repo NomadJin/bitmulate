@@ -1,2 +1,24 @@
 @import 'utils';
 
+.login-modal {
+    border-radius: 2px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    @include material-shadow(3);
+    .bar {
+        height: 6px;
+        background: linear-gradient(to right,#30a1c1,#9dd5ba);
+    }
+    .content {
+        padding: 2rem;
+        h2 {
+            text-align: center;
+            margin: 0;
+            font-weight: 300;
+            color: material-color('grey', '900');
+            margin-bottom: 1rem;
+        }
+    }
+}

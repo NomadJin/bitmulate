@@ -18,16 +18,16 @@
 
 @keyframes bounceUpIn {
     0% {
-        transform: translate(100px);
+        transform: translateY(250px);
         opacity: 1;
     }
     50% {
         opacity: 1;
-        transform: translate(-50px);
+        transform: translateY(-50px);
     }
     100% {
         opacity: 1;
-        transform: translate(0px);
+        transform: translateY(0px);
     }
 }
 
@@ -41,7 +41,7 @@
         opacity: 1;
     }
     100% {
-        transform: translateY(100px);
+        transform: translateY(250px);
         opacity: 0;
     }
 }
