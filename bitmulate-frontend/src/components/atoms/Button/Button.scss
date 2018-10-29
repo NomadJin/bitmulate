@@ -34,6 +34,31 @@
             @include material-shadow(2, 2);
         }
     }
+
+    &.flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+    }
+
+    &.flat {
+        border-radius: 2px;
+        transition: all .15s ease-in;
+        &:hover {
+            @include material-shadow(2);
+        }
+        &.teal {
+            color: white;
+            background: material-color('teal', '300');
+            &:hover {
+                background: #6dd0c6;
+            }
+            &.active {
+                background: material-color('teal', '300');
+            }
+        }
+    }
     
     
 }

@@ -2,15 +2,16 @@
 
 .input {
     outline: none;
-    border: none;
-    border-bottom: 2px solid material-color('grey', '600');
+    border-radius: 2px;
+    border: 1px solid material-color('grey', '400');
     padding-bottom: 0.5rem;
     font-size: 1.25rem;
+    transition: color 0.3s, border-color 0.3s;
     &.full-width {
         width: 100%;
     }
     &:focus {
-        border-bottom: 1px solid material-color('teal', '600');
+        border: 1px solid material-color('teal', '600');
         color: material-color('teal', '500');
         &::placeholder {
             color: material-color('teal', '400');
@@ -19,5 +20,5 @@
 }
 
 .input + .input {
-    margin-top: 2rem;
+    margin-top: 0.5rem;
 }
