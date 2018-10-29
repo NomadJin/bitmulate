@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './LoginModal.scss'
 import classNames from 'classnames/bind'
-import { Modal, Input, Button, TextButton } from '../../../components'
+import { Modal, Input, Button, TextButton, SocialLoginButton } from '../../../components'
 
 const cx = classNames.bind(styles)
 
@@ -33,6 +33,7 @@ const LoginModal = ({
                         <div className={cx('or')}>OR</div>
                     </div>
                     <h3>소셜 계정으로 로그인</h3>
+                    <SocialLoginButton/>
                 </div>
             </div>
         </Modal>
