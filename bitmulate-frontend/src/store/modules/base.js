@@ -5,7 +5,7 @@ import { Map } from 'immutable'
 const SET_SCREEN_MASK_VISIBILITY = 'domain/SET_SCREEN_MASK_VISIBILITY'
 
 // action creato
-export const setScreenMaskVisibility = createAction(SET_SCREEN_MASK_VISIBILITY)
+export const setScreenMaskVisibility = createAction(SET_SCREEN_MASK_VISIBILITY) //(visible)
 
 // initial state
 const initialState = Map({

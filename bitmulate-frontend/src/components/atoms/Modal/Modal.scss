@@ -1,12 +1,5 @@
 @import 'utils';
 
-.entered {
-    animation-duration: .4s;
-    animation-fill-mode: both;
-    animation-timing-function: ease-in-out;
-    animation-name: bounceUpIn;
-}
-
 .entering {
     animation-duration: .4s;
     animation-fill-mode: both;

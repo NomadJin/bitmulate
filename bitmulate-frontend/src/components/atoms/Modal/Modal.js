@@ -8,18 +8,18 @@ const cx = classNames.bind(styles)
 class ModalWrapper extends Component {
   render() {
     const { visible, children } = this.props
-    if(!visible) return null
+    //if(!visible) return null
     return (
       <div className={cx('modal-wrapper')}>
         <Transition in={ visible } timeout={400}>
           {(state) => {
             console.log(state)
             return(
-            <div className={cx(`${state}`)}>
-              <div className={cx('modal')}>
-                { children }
+              <div className={cx(`${state}`)}>
+                { visible && <div className={cx('modal')}>
+                  { children }
+                </div> }
               </div>
-            </div>
             )
           }}
         </Transition>
