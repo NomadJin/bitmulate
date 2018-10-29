@@ -32,6 +32,7 @@ const LoginModal = ({
                     <div className={cx('separator')}>
                         <div className={cx('or')}>OR</div>
                     </div>
+                    <h3>소셜 계정으로 로그인</h3>
                 </div>
             </div>
         </Modal>
