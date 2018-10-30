@@ -7,15 +7,17 @@ const cx = classNames.bind(styles)
 
 const LoginModal = ({
     visible,
+    mode,
     onChangeMode
 }) => {
-    //if(!visible) return null
+    const modeText = mode === 'login' ? '로그인' : '회원가입'
+    const invertedText = mode === 'login' ? '회원가입' : '로그인'
     return (
         <Modal visible={visible}>
             <div className={cx('login-modal')}>
                 <div className={cx('bar')}></div>
                 <div className={cx('content')}>
-                    <h3>이메일로 로그인</h3>
+                    <h3>이메일로 {modeText}</h3>
                     <div className={cx('form')}>
                         <Input fullWidth big placeholder="이메일"/>
                         <Input fullWidth big placeholder="비밀번호" type="password"/>
@@ -24,15 +26,15 @@ const LoginModal = ({
                         flat color="teal" 
                         flex padding="0.6rem" 
                         className={cx('login')}
-                        >로그인</Button>
+                        >{modeText}</Button>
                     <div className={cx('login-foot')}>
                         <TextButton>비밀번호 찾기</TextButton>
-                        <TextButton right onClick={onChangeMode}>회원가입</TextButton>
+                        <TextButton right onClick={onChangeMode}>{invertedText}</TextButton>
                     </div>
                     <div className={cx('separator')}>
                         <div className={cx('or')}>OR</div>
                     </div>
-                    <h3>소셜 계정으로 로그인</h3>
+                    <h3>소셜 계정으로 {modeText}</h3>
                     <SocialLoginButton/>
                 </div>
             </div>

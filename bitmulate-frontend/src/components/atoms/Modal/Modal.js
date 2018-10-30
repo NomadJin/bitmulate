@@ -1,28 +1,27 @@
 import React, { Component } from 'react'
 import styles from './Modal.scss'
 import classNames from 'classnames/bind'
-import Transition from 'react-transition-group/Transition'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 const cx = classNames.bind(styles)
 
 class ModalWrapper extends Component {
   render() {
-    const { visible, children } = this.props
-    //if(!visible) return null
+    const { visible, children } = this.props;
+
     return (
       <div className={cx('modal-wrapper')}>
-        <Transition in={ visible } timeout={400}>
-          {(state) => {
-            console.log(state)
-            return(
-              <div className={cx(`${state}`)}>
-                { visible && <div className={cx('modal')}>
-                  { children }
-                </div> }
-              </div>
-            )
-          }}
-        </Transition>
+        <CSSTransitionGroup
+        transitionEnterTimeout={400}
+        transitionLeaveTimeout={400}
+          transitionName={{
+            enter: cx('enter'),
+            leave: cx('leave')
+          }}>
+          { visible && <div className={cx('modal')}>
+            {children}
+          </div> }
+        </CSSTransitionGroup>
       </div>
     )
   }

@@ -14,19 +14,27 @@ class LoginModalContainer extends Component {
     BaseActions.setScreenMaskVisibility(false)
     AuthActions.toggleLoginModal()
   }
+
+  handleChangeMode = () => {
+    const { mode, AuthActions } = this.props
+    const inverted = mode === 'login' ? 'register' : 'login'
+    AuthActions.setModalMode(inverted)
+  }
   
   render() {
-    const { visible } = this.props
+    const { visible, mode } = this.props
+    const { handleChangeMode } = this
     
     return (
-      <LoginModal visible={visible}/>
+      <LoginModal visible={visible} mode={mode} onChangeMode={handleChangeMode}/>
     )
   }
 }
 
 export default connect(
     (state) => ({
-      visible: state.auth.getIn(['modal', 'visible'])
+      visible: state.auth.getIn(['modal', 'visible']),
+      mode: state.auth.getIn(['modal', 'mode'])
     }),
     (dispatch) => ({
       BaseActions: bindActionCreators(baseActions, dispatch),

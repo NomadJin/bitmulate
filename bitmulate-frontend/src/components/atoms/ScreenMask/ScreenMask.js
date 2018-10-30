@@ -1,21 +1,23 @@
 import React from 'react'
 import styles from './ScreenMask.scss'
-import Transition from 'react-transition-group/Transition'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-const ScreenMask = ({ visible }) => (
-  <Transition in={visible} timeout={150}>
-    {(state) => {
-        //console.log(state)
-        if(state === 'exited') return null
-        return (
-        <div className={cx(`fade-${state}`)}>
-          <div className={cx('screen-mask')}/>
-        </div>)
-    }}
-  </Transition>
-);
+const ScreenMask = ({visible}) => {
+  return (
+    <CSSTransitionGroup
+      transitionEnterTimeout={150}
+      transitionLeaveTimeout={150}
+      transitionName={{
+        enter: cx('fade-enter'),
+        leave: cx('fade-leave')
+      }}
+    >
+      { visible && <div className={cx('screen-mask')}/> }
+    </CSSTransitionGroup>
+  )
+}
 
 export default ScreenMask

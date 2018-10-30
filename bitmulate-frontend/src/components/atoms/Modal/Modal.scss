@@ -1,13 +1,13 @@
 @import 'utils';
 
-.entering {
+.enter {
     animation-duration: .4s;
     animation-fill-mode: both;
     animation-timing-function: ease-in-out;
     animation-name: bounceUpIn;
-}
-
-.exiting {
+  }
+  
+.leave {
     animation-duration: .4s;
     animation-fill-mode: both;
     animation-timing-function: ease-in-out;
