@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './LoginModal.scss'
 import classNames from 'classnames/bind'
-import { Modal, Input, Button, TextButton, SocialLoginButton } from '../../../components'
+import { Modal, Input, Button, TextButton, SocialLoginButton, InputError } from '../../../components'
 
 const cx = classNames.bind(styles)
 
@@ -38,6 +38,7 @@ const LoginModal = ({
                             name="email" 
                             fullWidth big 
                             placeholder="이메일"/>
+                            <InputError>에러 표시</InputError>
                         <Input
                             value={password}
                             onChange={onChangeInput}
@@ -45,6 +46,7 @@ const LoginModal = ({
                             fullWidth big 
                             placeholder="비밀번호" 
                             type="password"/>
+                            <InputError>에러 표시</InputError>
                     </div>
                     <Button 
                         flat color="teal" 

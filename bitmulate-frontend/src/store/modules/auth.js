@@ -34,6 +34,7 @@ export default handleActions({
     [SET_MODAL_MODE]: (state, action) => {
         return state.setIn(['modal', 'mode'], action.payload)
                     .set('form', initialState.get('form'))
+                    .set('error', null)
     },
     [CHANGE_INPUT]: (state, action) => {
         const { name, value } = action.payload

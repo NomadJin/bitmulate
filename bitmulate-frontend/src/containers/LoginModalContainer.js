@@ -61,9 +61,12 @@ class LoginModalContainer extends Component {
     }
 
     const form = this.props.form.toJS()
-    const validation = validate(form, constraints)
+    const error = validate(form, constraints)
 
-    console.log(validation)
+    const { AuthActions } = this.props
+    if(error) {
+      AuthActions.setError(error)
+    }
   }
   
   render() {
