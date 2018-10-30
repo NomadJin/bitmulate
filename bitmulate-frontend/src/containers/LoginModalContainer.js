@@ -20,13 +20,28 @@ class LoginModalContainer extends Component {
     const inverted = mode === 'login' ? 'register' : 'login'
     AuthActions.setModalMode(inverted)
   }
+
+  handleChangeInput = (e) => {
+    const { AuthActions, mode } = this.props
+    const { name, value } = e.target
+    AuthActions.changeInput({
+      form: mode,
+      name,
+      value
+    })
+  }
   
   render() {
-    const { visible, mode } = this.props
-    const { handleChangeMode } = this
+    const { visible, mode, forms } = this.props
+    const { handleChangeMode, handleChangeInput} = this
     
     return (
-      <LoginModal visible={visible} mode={mode} onChangeMode={handleChangeMode}/>
+      <LoginModal 
+        visible={visible} 
+        mode={mode} 
+        forms={forms}
+        onChangeInput={handleChangeInput}
+        onChangeMode={handleChangeMode}/>
     )
   }
 }
@@ -34,7 +49,8 @@ class LoginModalContainer extends Component {
 export default connect(
     (state) => ({
       visible: state.auth.getIn(['modal', 'visible']),
-      mode: state.auth.getIn(['modal', 'mode'])
+      mode: state.auth.getIn(['modal', 'mode']),
+      forms: state.auth.get('forms')
     }),
     (dispatch) => ({
       BaseActions: bindActionCreators(baseActions, dispatch),
