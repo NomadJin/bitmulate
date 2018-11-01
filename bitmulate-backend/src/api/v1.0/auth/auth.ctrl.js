@@ -1,6 +1,23 @@
 const Joi = require('joi')
 const User = require('../../../db/models/User')
-const token = require('../../../lib/token')
+
+exports.checkEmail = async (ctx) => {
+    const { email } = ctx.params
+    
+    if(!email) {
+        ctx.status = 400
+        return
+    }
+
+    try {
+        const account = await User.findByEmail(email)
+        ctx.body = {
+            exists: !!account
+        }
+    } catch (e) {
+        ctx.throw(e, 500)
+    }
+}
 
 exports.localRegister = async (ctx) => {
     
@@ -58,7 +75,7 @@ exports.localRegister = async (ctx) => {
         //console.log(accessToken)
 
     } catch (e) {
-        ctx.throw(500)
+        ctx.throw(e, 500)
     }
 }
 
@@ -113,7 +130,7 @@ exports.locaLogin = async (ctx) => {
         }
 
     } catch (e) {
-        ctx.throw(e)
+        ctx.throw(e, 500)
     }
 }
 
