@@ -70,7 +70,7 @@ class LoginModalContainer extends Component {
   }
   
   render() {
-    const { visible, mode, form } = this.props
+    const { visible, mode, form, error } = this.props
     const { 
       handleChangeMode, 
       handleChangeInput,
@@ -85,6 +85,7 @@ class LoginModalContainer extends Component {
         visible={visible} 
         mode={mode} 
         forms={form}
+        error={error}
         onChangeInput={handleChangeInput}
         onChangeMode={handleChangeMode}
         onLogin={handleLogin}
@@ -97,7 +98,8 @@ export default connect(
     (state) => ({
       visible: state.auth.getIn(['modal', 'visible']),
       mode: state.auth.getIn(['modal', 'mode']),
-      form: state.auth.get('form')
+      form: state.auth.get('form'),
+      error: state.auth.get('error')
     }),
     (dispatch) => ({
       BaseActions: bindActionCreators(baseActions, dispatch),

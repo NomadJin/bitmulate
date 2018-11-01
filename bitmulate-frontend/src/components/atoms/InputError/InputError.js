@@ -4,10 +4,11 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-const InputError = ({children, ...rest}) => {
+const InputError = ({children, error, ...rest}) => {
+    if(!error) return null
     return (
         <div className={cx('input-error')} {...rest}>
-            {children}
+            {error}
         </div>
     )
 }

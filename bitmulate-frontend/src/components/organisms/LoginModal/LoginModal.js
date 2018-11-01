@@ -9,6 +9,7 @@ const LoginModal = ({
     visible,
     mode,
     forms,
+    error,
     onChangeInput,
     onChangeMode,
     onLogin,
@@ -22,6 +23,11 @@ const LoginModal = ({
         email,
         password
     } = forms.toJS()
+
+    const {
+        email: emailError,
+        password: passwordError
+    } = error? error.toJS() : { }
 
     const onButtonClick = isLogin ? onLogin : onRegister
 
@@ -38,7 +44,7 @@ const LoginModal = ({
                             name="email" 
                             fullWidth big 
                             placeholder="이메일"/>
-                            <InputError>에러 표시</InputError>
+                            <InputError error={emailError}/>
                         <Input
                             value={password}
                             onChange={onChangeInput}
@@ -46,7 +52,7 @@ const LoginModal = ({
                             fullWidth big 
                             placeholder="비밀번호" 
                             type="password"/>
-                            <InputError>에러 표시</InputError>
+                            <InputError error={passwordError}/>
                     </div>
                     <Button 
                         flat color="teal" 
