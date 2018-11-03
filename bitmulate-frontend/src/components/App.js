@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import { HomePage, TradePage } from './index'
+import { HomePage, TradePage, RegisterPage } from './index'
 import { ScreenMaskContainer, LoginModalContainer, RegisterScreenContainer } from '../containers'
 
 class App extends Component {
@@ -9,6 +9,7 @@ class App extends Component {
             <div>
                <Route exact path="/" component={HomePage}/>
                <Route path="/trade" component={TradePage}/>
+               <Route path="/register" component={RegisterPage}/>
                <ScreenMaskContainer/>
                <LoginModalContainer/>
                <RegisterScreenContainer/>

@@ -7,6 +7,14 @@
     overflow: hidden;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 128px), 0 100%);
     position: relative;
+    transition: all .7s ease-in-out;
+    &.fixed {
+      display: fixed;
+    }
+    &.half {
+      transform: translateY(-70%);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
     .image {
       transition: all 1s ease-in;
       background: url('../../../static/images/background.png');
