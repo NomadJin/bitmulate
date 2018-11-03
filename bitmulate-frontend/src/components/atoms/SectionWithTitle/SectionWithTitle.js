@@ -4,10 +4,13 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-const SectionWithTitle = () => {
+const SectionWithTitle = ({title, children}) => {
     return (
         <div className={cx('section-with-title')}>
-
+            <h3>{title}</h3>
+            <section>
+                {children}
+            </section>
         </div>
     )
 }
