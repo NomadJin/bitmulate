@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styles from './Modal.scss'
 import classNames from 'classnames/bind'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
 const cx = classNames.bind(styles)
 

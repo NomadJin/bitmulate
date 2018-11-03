@@ -53,7 +53,7 @@ export default handleActions({
             const { exists } = action.payload.data
             return exists
                     ? state.set('error', Map({email: '이미 존재하는 이메일입니다.'}))
-                    : state 
+                    : state
         }
     })
 }, initialState)

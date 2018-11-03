@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './ScreenMask.scss'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)

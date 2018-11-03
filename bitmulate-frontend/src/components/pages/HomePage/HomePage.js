@@ -1,10 +1,6 @@
 import React from 'react'
 import { PageTemplate, PolyBackground, Block } from '../../../components'
 import { HeaderContainer } from '../../../containers'
-//import styles from './HomePage.scss';
-//import classNames from 'classnames/bind'
-
-//const cx = classNames.bind(styles);
 
 const HomePage = () => {
     return (

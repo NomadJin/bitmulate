@@ -6,14 +6,19 @@ import { LoginModal } from '../components'
 import onClickOutside from 'react-onclickoutside'
 import * as baseActions from '../store/modules/base'
 import * as authActions from '../store/modules/auth'
+import * as registerActions from '../store/modules/register'
 import validate from 'validate.js'
 
 class LoginModalContainer extends Component {
-  handleClickOutside = evt => {
+  handleClose = () => {
     const { visible, BaseActions, AuthActions } = this.props
     if(!visible) return
     BaseActions.setScreenMaskVisibility(false)
     AuthActions.toggleLoginModal()
+  }
+
+  handleClickOutside = evt => {
+    this.handleClose()
   }
 
   handleChangeMode = () => {
@@ -44,7 +49,11 @@ class LoginModalContainer extends Component {
     console.log('this is a login button')
   }
 
-  handleRegister = () => {
+  handleRegister = async () => {
+    const { AuthActions, RegisterActions } = this.props
+    // reset error
+    AuthActions.setError(null)
+
     // validate email and password
     const constraints = {
       email: {
@@ -63,10 +72,22 @@ class LoginModalContainer extends Component {
     const form = this.props.form.toJS()
     const error = validate(form, constraints)
 
-    const { AuthActions } = this.props
     if(error) {
-      AuthActions.setError(error)
+      return AuthActions.setError(error)
     }
+
+    try {
+      await AuthActions.checkEmail(form.email)
+    } catch (e) {
+      if(this.props.error) {
+        return
+      }
+    }
+
+    // close the modal, open the register screen
+    this.handleClose()
+
+    RegisterActions.show()
   }
   
   render() {
@@ -76,8 +97,8 @@ class LoginModalContainer extends Component {
       handleChangeInput,
       handleLogin,
       handleRegister,
-      handleLoginButtonClick,
-      handleRegisterButtonClick
+      //handleLoginButtonClick,
+      //handleRegisterButtonClick
     } = this
     
     return (
@@ -103,6 +124,7 @@ export default connect(
     }),
     (dispatch) => ({
       BaseActions: bindActionCreators(baseActions, dispatch),
-      AuthActions: bindActionCreators(authActions, dispatch)
+      AuthActions: bindActionCreators(authActions, dispatch),
+      RegisterActions: bindActionCreators(registerActions, dispatch)
     })
 )(onClickOutside(LoginModalContainer))

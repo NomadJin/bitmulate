@@ -118,5 +118,6 @@
     "@storybook/react": "^3.4.11",
     "node-sass": "^4.9.3",
     "sass-loader": "^7.1.0"
-  }
+  },
+  "proxy": "http://localhost:4000/"
 }
