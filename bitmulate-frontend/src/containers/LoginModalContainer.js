@@ -89,7 +89,9 @@ class LoginModalContainer extends Component {
     // close the modal, open the register screen
     this.handleClose()
     const { history } = this.props
-    history.push('/register')
+    setTimeout(() => {
+      history.push('/register')
+    }, 400)
   }
   
   render() {
@@ -98,9 +100,7 @@ class LoginModalContainer extends Component {
       handleChangeMode, 
       handleChangeInput,
       handleLogin,
-      handleRegister,
-      //handleLoginButtonClick,
-      //handleRegisterButtonClick
+      handleRegister
     } = this
     
     return (

@@ -1,15 +1,15 @@
 import React from 'react'
 import styles from './Logo.scss'
 import classNames from 'classnames/bind'
-//import logo from '../../../static/images/logo.png'
+import { Link } from 'react-router-dom'
 
 const cx = classNames.bind(styles)
 
 const Logo = () => {
     return (
-        <div className={cx('logo')}>
+        <Link to="/" className={cx('logo')}>
             Bitmulate
-        </div>
+        </Link>
     )
 }
 
