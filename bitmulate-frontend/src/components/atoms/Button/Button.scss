@@ -32,6 +32,9 @@
         }
         &:active {
             @include material-shadow(2, 2);
+            background: rgb(230,230,230);
+            border: 2px solid rgb(230,230,230);
+            color: material-color('grey', '800');
         }
     }
 
@@ -48,14 +51,28 @@
         &:hover {
             @include material-shadow(2);
         }
+        &.white {
+            background: white;
+            border: 1px solid material-color('grey', '100');
+
+            &:hover {
+                background: material-color('grey', '100');
+            }
+            &:active {
+                background: material-color('grey', '100');
+            }
+        }
         &.teal {
             color: white;
             background: material-color('teal', '300');
+            // border: 1px solid material-color('teal', '400');
             &:hover {
-                background: #6dd0c6;
+                background: material-color('teal', '200');
+                // border: 1px solid material-color('teal', '300');
             }
             &.active {
-                background: material-color('teal', '300');
+                background: material-color('teal', '400');
+                // border: 1px solid material-color('teal', '500');
             }
         }
     }

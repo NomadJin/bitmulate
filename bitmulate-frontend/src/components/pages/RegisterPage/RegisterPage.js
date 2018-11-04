@@ -6,7 +6,10 @@ import {
     Paper, 
     SectionWithTitle,
     Input,
-    SelectCurrency
+    SelectCurrency,
+    Option,
+    Button,
+    AlignRight
 } from '../../../components'
 import { HeaderContainer } from '../../../containers'
 import styles from './RegisterPage.scss'
@@ -47,7 +50,22 @@ class RegisterPage extends Component {
                                 화폐 선택
                             </h4>
                             <SelectCurrency/>
+                            <h4>
+                                금액 선택
+                            </h4>
+                            <Option active>
+                                ₩ 1,000,000
+                            </Option>
+                            <Option>
+                                $ 1,000
+                            </Option>
+                            <Option>
+                                Ƀ 100
+                            </Option>
                         </SectionWithTitle>
+                        <AlignRight>
+                            <Button flat color="teal" className={cx('register-button')} xPadding="2rem">가입</Button>
+                        </AlignRight>
                     </RegisterTemplate>
                 </Paper>
             </PageTemplate>

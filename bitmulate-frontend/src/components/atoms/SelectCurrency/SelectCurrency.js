@@ -4,16 +4,17 @@ import classNames from 'classnames/bind'
 
 const cx = classNames.bind(styles)
 
-const Currency = ({children, active}) => (
+const Currency = ({children, symbol, active}) => (
     <div className={cx('currency', {active})}>
-        {children}
+        <div className={cx('symbol')}>{symbol}</div>
+        <div className={cx('text')}>{children}</div>
     </div>
 )
 
 const SelectCurrency = ({selectedCurrency}) => {
     return (
         <div className={cx('select-currency')}>
-            <Currency symbol="₩">KRW</Currency>
+            <Currency symbol="₩" active>KRW</Currency>
             <Currency symbol="$">USD</Currency>
             <Currency symbol="Ƀ">BTC</Currency>
         </div>
