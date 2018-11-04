@@ -19,6 +19,19 @@ exports.checkEmail = async (ctx) => {
     }
 }
 
+exports.checkDisplayName = async (ctx) => {
+    const { displayName } = ctx.params
+    
+    try {
+        const account = await User.findByDisplayName(displayName)
+        ctx.body = {
+            exists: !!account
+        }
+    } catch (e) {
+        ctx.throw(e, 500)
+    }
+}
+
 exports.localRegister = async (ctx) => {
     
     const { body } = ctx.request

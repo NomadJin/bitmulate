@@ -6,7 +6,6 @@ import { LoginModal } from '../components'
 import onClickOutside from 'react-onclickoutside'
 import * as baseActions from '../store/modules/base'
 import * as authActions from '../store/modules/auth'
-import * as registerActions from '../store/modules/register'
 import validate from 'validate.js'
 
 import { withRouter } from 'react-router'
@@ -52,7 +51,7 @@ class LoginModalContainer extends Component {
   }
 
   handleRegister = async () => {
-    const { AuthActions, RegisterActions } = this.props
+    const { AuthActions } = this.props
     // reset error
     AuthActions.setError(null)
 
@@ -127,6 +126,5 @@ export default connect(
     (dispatch) => ({
       BaseActions: bindActionCreators(baseActions, dispatch),
       AuthActions: bindActionCreators(authActions, dispatch),
-      RegisterActions: bindActionCreators(registerActions, dispatch)
     })
 )(withRouter(onClickOutside(LoginModalContainer)))

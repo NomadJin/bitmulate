@@ -21,12 +21,17 @@ const RegisterForm = ({
     onChangeNickname,
     onSetCurrency,
     onSelectOptionIndex,
-    onSubmit
+    onSubmit,
+    onNicknameBlur,
+    displayNameExists
 }) => {
     return (
         <div className={cx('register-form')}>
             <SectionWithTitle title="닉네임" description="사용하실 닉네임을 입력하세요.">
-                <Input value={nickname} onChange={onChangeNickname}/>
+                {
+                  displayNameExists && <p className={cx('exists')}>이미 존재하는 닉네임입니다.</p>
+                }
+                <Input value={nickname} onChange={onChangeNickname} onBlur={onNicknameBlur}/>
             </SectionWithTitle>
             <SectionWithTitle title="초기자금 설정">
                 <div className={cx('description')}>
