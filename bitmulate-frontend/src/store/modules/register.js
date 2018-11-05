@@ -8,6 +8,7 @@ const CHANGE_NICKNAME = 'register/CHANGE_NICKNAME'
 const SET_CURRENCY = 'register/SET_CURRENCY'
 const SELECT_OPTION_INDEX = 'register/SELECT_OPTION_INDEX'
 const CHECK_DISPLAY_NAME = 'auth/CHECK_DISPLAY_NAME'
+const SUBMIT = 'SUBMIT'
 
 
 // action creator
@@ -15,6 +16,7 @@ export const changeNickname = createAction(CHANGE_NICKNAME)
 export const setCurrency = createAction(SET_CURRENCY)
 export const selectOptionIndex = createAction(SELECT_OPTION_INDEX)
 export const checkDisplayName = createAction(CHECK_DISPLAY_NAME, AuthAPI.checkDisplayName) //(displayName)
+export const submit = createAction(SUBMIT, AuthAPI.register)
 
 // initial state
 const initialState = Map({
@@ -43,6 +45,12 @@ export default handleActions({
         onSuccess: (state, action) => {
             const { exists } = action.payload.data
             return state.set('displayNameExists', exists)
+        }
+    }),
+    ...pender({
+        type: SUBMIT,
+        onSuccess: (state, action) => {
+            return state
         }
     })
 }, initialState)

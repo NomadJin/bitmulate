@@ -38,8 +38,17 @@ class RegisterFormContainer extends Component {
   }
 
   handleSubmit = () => {
-      const { nickname, currency, optionIndex } = this.props
-      console.log(nickname, currency, optionIndex)
+      const { nickname, currency, optionIndex, authForm } = this.props
+      const { email, password } = authForm.toJS()
+      console.log({
+          displayName: nickname,
+          email,
+          password,
+          initialMoney: {
+              currency,
+              index: optionIndex
+          }
+      })
   }
 
   render() {
@@ -74,6 +83,7 @@ class RegisterFormContainer extends Component {
 
 export default connect(
     (state) => ({
+        authForm: state.auth.get('form'),
         nickname: state.register.get('nickname'),
         currency: state.register.get('currency'),
         optionIndex: state.register.get('optionIndex'),

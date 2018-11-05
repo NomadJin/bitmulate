@@ -29,7 +29,7 @@ const RegisterForm = ({
         <div className={cx('register-form')}>
             <SectionWithTitle title="닉네임" description="사용하실 닉네임을 입력하세요.">
                 {
-                  displayNameExists && <p className={cx('exists')}>이미 존재하는 닉네임입니다.</p>
+                  displayNameExists && <div className={cx('exists')}>이미 존재하는 닉네임입니다.</div>
                 }
                 <Input value={nickname} onChange={onChangeNickname} onBlur={onNicknameBlur}/>
             </SectionWithTitle>
@@ -47,7 +47,7 @@ const RegisterForm = ({
                 <InitialMoneyOptions currency={currency} optionIndex={optionIndex} onSelect={onSelectOptionIndex}/>
             </SectionWithTitle>
             <AlignRight>
-                <Button flat color="teal" className={cx('register-button')} xPadding="2rem" onClick={onSubmit}>가입</Button>
+                <Button disabled={displayNameExists} flat color="teal" className={cx('register-button')} xPadding="2rem" onClick={onSubmit}>가입</Button>
             </AlignRight>
         </div>
     )

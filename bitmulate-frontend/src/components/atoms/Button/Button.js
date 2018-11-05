@@ -15,6 +15,7 @@ const Button = ({
     padding="0.5rem",
     xPadding,
     style,
+    disabled,
     ...rest
 }) => {
     const dynamicStyle = {
@@ -27,7 +28,8 @@ const Button = ({
         <div className={cx('button', {
             invert,
             flex,
-            flat
+            flat,
+            disabled
         }, color, className)
         } 
         style={{
