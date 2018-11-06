@@ -1,5 +1,6 @@
 const Joi = require('joi')
 const User = require('../../../db/models/User')
+const { optionsPerCurrency } = require('../../../lib/variables')
 
 exports.checkEmail = async (ctx) => {
     const { email } = ctx.params
@@ -77,9 +78,18 @@ exports.localRegister = async (ctx) => {
             }
             return
         }
+
+        const { currency, index } = body.initialMoney
+
+        const value = optionsPerCurrency[currency].initialValue * Math.pow(10, index)
+        const initial = {
+            currency,
+            value
+        }
+
         //creates user account
         const user = await User.localRegister({
-            displayName, email, password
+            displayName, email, password, initial
         })
 
         ctx.body = {
@@ -95,8 +105,6 @@ exports.localRegister = async (ctx) => {
             httpOnly: true,
             maxAge: 1000 * 60 * 60 * 24 * 7
         })
-
-        //console.log(accessToken)
 
     } catch (e) {
         ctx.throw(e, 500)
