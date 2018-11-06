@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as registerActions from '../store/modules/register'
 import debounce from 'lodash/debounce'
+import { withRouter } from 'react-router'
 
 class RegisterFormContainer extends Component {
 
@@ -38,17 +39,19 @@ class RegisterFormContainer extends Component {
   }
 
   handleSubmit = () => {
-      const { nickname, currency, optionIndex, authForm } = this.props
+      const { nickname, currency, optionIndex, authForm, RegisterActions } = this.props
       const { email, password } = authForm.toJS()
-      console.log({
-          displayName: nickname,
-          email,
-          password,
-          initialMoney: {
-              currency,
-              index: optionIndex
-          }
-      })
+
+      RegisterActions.submit({
+        displayName: nickname,
+        email,
+        password,
+        initialMoney: {
+            currency,
+            index: optionIndex
+        }
+    })
+
   }
 
   render() {
@@ -92,4 +95,4 @@ export default connect(
     (dispatch) => ({
         RegisterActions: bindActionCreators(registerActions, dispatch)
     })
-)(RegisterFormContainer)
+)(withRouter(RegisterFormContainer))

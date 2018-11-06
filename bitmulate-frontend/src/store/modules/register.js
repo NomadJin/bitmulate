@@ -16,7 +16,7 @@ export const changeNickname = createAction(CHANGE_NICKNAME)
 export const setCurrency = createAction(SET_CURRENCY)
 export const selectOptionIndex = createAction(SELECT_OPTION_INDEX)
 export const checkDisplayName = createAction(CHECK_DISPLAY_NAME, AuthAPI.checkDisplayName) //(displayName)
-export const submit = createAction(SUBMIT, AuthAPI.register)
+export const submit = createAction(SUBMIT, AuthAPI.localRegister)
 
 // initial state
 const initialState = Map({
