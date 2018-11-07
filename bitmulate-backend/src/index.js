@@ -26,5 +26,5 @@ app.use(router.routes())
 app.use(router.allowedMethods())
 
 app.listen(port, () => {
-    console.log(`heurm server is listening to port ${port}`)
+    console.log(`bitmulate server is listening to port ${port}`)
 })
