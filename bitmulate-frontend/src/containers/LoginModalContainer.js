@@ -6,6 +6,7 @@ import { LoginModal } from '../components'
 import onClickOutside from 'react-onclickoutside'
 import * as baseActions from '../store/modules/base'
 import * as authActions from '../store/modules/auth'
+import * as userActions from '../store/modules/user'
 import validate from 'validate.js'
 
 import { withRouter } from 'react-router'
@@ -38,16 +39,19 @@ class LoginModalContainer extends Component {
     })
   }
 
-  handleLoginButtonClick = () => {
+  handleLogin = async () => {
+    const { AuthActions, UserActions, form } = this.props
+    const { email, password } = form.toJS()
 
-  }
-
-  handleRegisterButtonClick = () => {
-
-  }
-
-  handleLogin = () => {
-    console.log('this is a login button')
+    try {
+      await AuthActions.localLogin({
+        email, password
+      })
+      const { loginResult } = this.props
+      UserActions.setUser(loginResult)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   handleRegister = async () => {
@@ -121,10 +125,12 @@ export default connect(
       visible: state.auth.getIn(['modal', 'visible']),
       mode: state.auth.getIn(['modal', 'mode']),
       form: state.auth.get('form'),
-      error: state.auth.get('error')
+      error: state.auth.get('error'),
+      loginResult: state.auth.get('loginResult')
     }),
     (dispatch) => ({
       BaseActions: bindActionCreators(baseActions, dispatch),
       AuthActions: bindActionCreators(authActions, dispatch),
+      UserActions: bindActionCreators(userActions, dispatch)
     })
 )(withRouter(onClickOutside(LoginModalContainer)))

@@ -156,9 +156,9 @@ exports.locaLogin = async (ctx) => {
         const { displayName, _id, metaInfo } = user
         
         ctx.body = {
-            displayName,
             _id,
-            metaInfo
+            displayName
+            //metaInfo
         }
 
     } catch (e) {
