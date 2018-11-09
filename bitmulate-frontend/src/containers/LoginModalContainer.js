@@ -7,6 +7,7 @@ import onClickOutside from 'react-onclickoutside'
 import * as baseActions from '../store/modules/base'
 import * as authActions from '../store/modules/auth'
 import * as userActions from '../store/modules/user'
+import storage from '../lib/storage'
 import validate from 'validate.js'
 
 import { withRouter } from 'react-router'
@@ -48,6 +49,7 @@ class LoginModalContainer extends Component {
         email, password
       })
       const { loginResult } = this.props
+      storage.set('__BTM_USER__', loginResult)
       UserActions.setUser(loginResult)
       AuthActions.setError(null)
       this.handleClose()

@@ -17,17 +17,20 @@ class HeaderContainer extends Component {
 
     render() {
         const { handleLoginButtonClick } = this
+        const { user } = this.props
 
         return (
            <Header
-             onLoginButtonClick={handleLoginButtonClick}/>
+             onLoginButtonClick={handleLoginButtonClick}
+             user={user}
+             />
         )
     }
 }
 
 export default connect(
     (state) => ({
-
+        user: state.user.get('user')
     }),
     (dispatch) => ({
         BaseActions: bindActionCreators(baseActions, dispatch),
