@@ -36,8 +36,7 @@ const initialState = Map({
 // reducer
 export default handleActions({
     [TOGGLE_LOGIN_MODAL]: (state, action) => {
-        const nextState = state.getIn(['modal', 'visible']) ? state : initialState
-        return nextState.updateIn(['modal', 'visible'], visible => !visible)
+        return state.updateIn(['modal', 'visible'], visible => !visible)
     },
     [SET_MODAL_MODE]: (state, action) => {
         return state.setIn(['modal', 'mode'], action.payload)

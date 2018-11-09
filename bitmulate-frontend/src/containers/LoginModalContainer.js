@@ -49,6 +49,8 @@ class LoginModalContainer extends Component {
       })
       const { loginResult } = this.props
       UserActions.setUser(loginResult)
+      AuthActions.setError(null)
+      this.handleClose()
     } catch (e) {
       console.log(e)
     }
@@ -83,10 +85,11 @@ class LoginModalContainer extends Component {
 
     try {
       await AuthActions.checkEmail(form.email)
-    } catch (e) {
       if(this.props.error) {
         return
       }
+    } catch (e) {
+      return
     }
 
     // close the modal, open the register screen
