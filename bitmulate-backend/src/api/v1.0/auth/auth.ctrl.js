@@ -166,6 +166,36 @@ exports.locaLogin = async (ctx) => {
     }
 }
 
+exports.socialLogin = (ctx) => {
+    const schema = Joi.object().keys({
+        accessToken: Joi.string().required()
+    })
+
+    const result = Joi.validate(ctx.request.body, schema)
+
+    if(result.error) {
+        ctx.status = 400
+        return
+    }
+
+    const { provider } = ctx.params
+    const { accessToken } = ctx.request.body
+
+    // check account existancy
+
+    // !exits && profile.email -> check email duplication
+      // duplicated -> merge account
+
+    // !exists -> 204 
+    
+    // exists -> set JWT, return userInfo
+
+    ctx.body = {
+        provider,
+        accessToken
+    }
+}
+
 exports.check = (ctx) => {
 
     const { user } = ctx.request

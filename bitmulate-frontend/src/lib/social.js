@@ -2,7 +2,7 @@ import hello from 'hellojs'
 
 hello.init({
     facebook: 267675827224312,
-    google: '139700894213-90pmhsv3jrjaoln83f353fmjvspdibb9.apps.googleusercontent.com'
+    google: '134334768678-glj5uacqedj5mjstni8937lps6cguup1.apps.googleusercontent.com'
 }, {redirect_uri: '/redirect.html'})
 
 export default(function () {

@@ -5,7 +5,10 @@ import './styles/main.scss'
 import registerServiceWorker from './registerServiceWorker';
 import configureStore from './store/configure'
 import { AppContainer } from 'react-hot-loader'
+import social from './lib/social'
 
+
+window.social = social
 const store = configureStore()
 
 const render = (Component) => ReactDOM.render(
