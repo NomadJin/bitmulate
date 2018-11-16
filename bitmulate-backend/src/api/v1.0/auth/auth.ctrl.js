@@ -1,6 +1,7 @@
 const Joi = require('joi')
 const User = require('../../../db/models/User')
 const { optionsPerCurrency } = require('../../../lib/variables')
+const { getProfile } = require('../../../lib/social')
 
 exports.checkEmail = async (ctx) => {
     const { email } = ctx.params
@@ -166,7 +167,7 @@ exports.locaLogin = async (ctx) => {
     }
 }
 
-exports.socialLogin = (ctx) => {
+exports.socialLogin = async (ctx) => {
     const schema = Joi.object().keys({
         accessToken: Joi.string().required()
     })
@@ -181,7 +182,22 @@ exports.socialLogin = (ctx) => {
     const { provider } = ctx.params
     const { accessToken } = ctx.request.body
 
+    // get social info
+    let profile = null
+    try {
+        profile = await getProfile(provider, accessToken)
+    } catch (e) {
+        ctx.status = 403
+        return
+    }
+
+    ctx.body = {
+        profile
+    }
+
     // check account existancy
+
+
 
     // !exits && profile.email -> check email duplication
       // duplicated -> merge account
