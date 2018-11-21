@@ -1,8 +1,6 @@
 const FB = require('fb')
 const { google } = require('googleapis')
 
-const plus = google.plus('v1')
-
 function getFacebookProfile(accessToken) {
     return FB.api('me', { fields: ['email'], access_token: accessToken }).then(
         (auth) => ({
@@ -13,17 +11,30 @@ function getFacebookProfile(accessToken) {
 }
 
 function getGoogleProfile(accessToken) {
+    
+    const plus = google.plus({
+        version: 'v1',
+        auth: 'AIzaSyCTDxOIlZXQvYXkM9mwFDOfDtq0dG1DqFo' // specify your API key here
+      })
+
     return new Promise((resolve, reject) => {
         plus.people.get({
           userId: 'me', 
           access_token: accessToken
         }, (err, auth) => {
-          console.log(auth)
-          if(err) reject(err)
-          resolve({
-            
-            //email: auth.emails[0].value
-          })
+          if(err) {
+              reject(err)
+              return
+          }
+          const {
+              id, emails
+          } = auth.data
+
+          const profile = {
+              id,
+              email: emails[0].value
+          }
+          resolve(profile)
         })
     })
 }
