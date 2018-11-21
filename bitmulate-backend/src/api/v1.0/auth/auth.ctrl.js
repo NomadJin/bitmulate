@@ -191,25 +191,79 @@ exports.socialLogin = async (ctx) => {
         return
     }
 
-    ctx.body = {
-        profile
-    }
+    const {
+        id, email   
+    } = profile
 
     // check account existancy
+    let user = null
+    try {
+        user = await User.findSocialId({provider, id})
+    } catch (e) {
+        ctx.throw(e, 500)
+    }
 
+    if(user) {
+        // set user status
+        try {
+            const bmtToken = await user.generateToken()
+            ctx.cookies.set('accessToken', bmtToken, {
+                httpOnly: true,
+                maxAge: 1000 * 60 * 60 * 24 * 7
+            })
+        } catch (e) {
+            ctx.throw(e, 500)
+        }
+        const { _id, displayName } = user
+        ctx.body = {
+            displayName,
+            _id
+        }
+        return
+    }
 
+    if(!user && profile.email) {
+        let duplicated = null
+        try {
+            duplicated = await User.findByEmail(email)
+        } catch (e) {
+            ctx.throw(e, 500)
+        }
 
-    // !exits && profile.email -> check email duplication
-      // duplicated -> merge account
+        // if there is a duplicated email, merges the user account
+        if(duplicated) {
+            duplicated.social[provider] = {
+                id,
+                accessToken
+            }
+            try {
+                await duplicated.save()
+            } catch (e) {
+                ctx.throw(e, 500)
+            }
+            // TODO: set JWT and return account info
+            try {
+                const bmtToken = await user.generateToken()
+                ctx.cookies.set('accessToken', bmtToken, {
+                    httpOnly: true,
+                    maxAge: 1000 * 60 * 60 * 24 * 7
+                })
+            } catch (e) {
+                ctx.throw(e, 500)
+            }
+            const { _id, displayName } = user
+            ctx.body = {
+                displayName,
+                _id
+            }
+        }
+    }
 
     // !exists -> 204 
-    
-    // exists -> set JWT, return userInfo
-
-    ctx.body = {
-        provider,
-        accessToken
+    if(!user) {
+        ctx.status = 204;
     }
+
 }
 
 exports.check = (ctx) => {
