@@ -44,7 +44,7 @@ exports.localRegister = async (ctx) => {
     const { body } = ctx.request
 
     const schema = Joi.object({
-        displayName: Joi.string().regex(/^[a-zA-Z0-9ㄱ-힣]{3,10}$/).required(),
+        displayName: Joi.string().regex(/^[a-zA-Z0-9ㄱ-힣]{3,12}$/).required(),
         email: Joi.string().email().required(),
         password: Joi.string().min(6).max(30),
         initialMoney: Joi.object({
@@ -263,6 +263,114 @@ exports.socialLogin = async (ctx) => {
     if(!user) {
         ctx.status = 204;
     }
+
+}
+
+exports.socialRegister = async (ctx) => {
+    
+    const { body } = ctx.request
+    
+    // check schema
+    const schema = Joi.object({
+        displayName: Joi.string().regex(/^[a-zA-Z0-9ㄱ-힣]{3,12}$/).required(),
+        provider: Joi.string().allow(['facebook', 'google']).required(),
+        accessToken: Joi.string().required(), 
+        initialMoney: Joi.object({
+            currency: Joi.string().allow('KRW', 'USD', 'BTC').required(),
+            index: Joi.number().min(0).max(2).required()
+        }).required()
+    })
+
+    const result = Joi.validate(body, schema)
+
+    if(result.error) {
+        ctx.status = 400
+        ctx.body = result.error
+        return
+    }
+
+    const {
+        displayName,
+        provider,
+        accessToken,
+        initialMoney
+    } = body
+    
+    // get social info
+    let profile = null
+    try {
+        profile = await getProfile(provider, accessToken)
+    } catch (e) {
+        ctx.status = 403
+        return
+    }
+    if(!profile) {
+        ctx.status = 403
+        return
+    }
+    // check email (+1 time)
+    const {
+        email,
+        id: socialId
+    } = profile
+
+    if(profile.email) {
+        try {
+            const exists = await User.findByEmail(profile.email)
+            if(exists) {
+                ctx.body = {
+                    key: 'email'
+                }
+                ctx.status = 409
+                return
+            }
+        } catch (e) {
+            ctx.throw(e, 500)
+        }
+    }
+        // exists: 409
+    // check displayName existancy
+    try {
+        const exists = await User.findByDisplayName(displayName)
+        if(exists) {
+            ctx.body = {
+                key: 'displayName'
+            }
+            ctx.status = 409
+        }
+    } catch (e) {
+        ctx.throw(e, 500)
+    }
+        // exists: 409
+    // initialMoney setting
+    const { currency, index } = initialMoney
+    const value = optionsPerCurrency[currency].initialValue * Math.pow(10, index)
+    const initial = {
+        currency,
+        value
+    }
+    // create user account
+    let user = null
+    try {
+        user = await User.socialRegister({
+            displayName,
+            email,
+            provider,
+            accessToken,
+            socialId,
+            initial
+        })
+    } catch (e) {
+        ctx.throw(e, 500)
+    }
+
+    ctx.body = {
+        displayName,
+        _id: user._id
+    }
+    // generate accessToken
+    // set cookie
+
 
 }
 

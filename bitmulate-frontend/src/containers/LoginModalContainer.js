@@ -109,11 +109,23 @@ class LoginModalContainer extends Component {
       await AuthActions.providerLogin(provider)
 
       const { socialInfo } = this.props
-      
+
       await AuthActions.socialLogin({
         provider,
         accessToken: socialInfo.get('accessToken')
       })
+
+      const { redirectToRegister } = this.props
+
+      if(redirectToRegister) {
+        this.handleClose()
+        const { history } = this.props
+        setTimeout(() => {
+          history.push('/register')
+        }, 400)
+      }
+
+      
     } catch (e) {
       console.log(e)
     }
@@ -151,7 +163,8 @@ export default connect(
       form: state.auth.get('form'),
       error: state.auth.get('error'),
       loginResult: state.auth.get('loginResult'),
-      socialInfo: state.auth.get('socialInfo')
+      socialInfo: state.auth.get('socialInfo'),
+      redirectToRegister: state.auth.get('redirectToRegister')
     }),
     (dispatch) => ({
       BaseActions: bindActionCreators(baseActions, dispatch),

@@ -45,7 +45,7 @@ export default handleActions({
     [TOGGLE_LOGIN_MODAL]: (state, action) => {
         const visible = state.getIn(['modal', 'visible'])
         if(visible) {
-            return state.updateIn(['modal', 'visible'], false)
+            return state.setIn(['modal', 'visible'], false)
         }
         return initialState.setIn(['modal','visible'], true)
     },
