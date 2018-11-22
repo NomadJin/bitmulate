@@ -295,7 +295,7 @@ exports.socialRegister = async (ctx) => {
         accessToken,
         initialMoney
     } = body
-    
+
     // get social info
     let profile = null
     try {
@@ -369,6 +369,15 @@ exports.socialRegister = async (ctx) => {
         _id: user._id
     }
     // generate accessToken
+    try {
+        const bmtToken = await user.generateToken()
+        ctx.cookies.set('accessToken', bmtToken, {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24 * 7
+        })
+    } catch (e) {
+        ctx.throw(e, 500)
+    }
     // set cookie
 
 
