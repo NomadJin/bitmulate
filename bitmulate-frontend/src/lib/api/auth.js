@@ -15,6 +15,16 @@ export const localRegister = ({
 })
 export const localLogin = ({email, password}) => axios.post('/api/v1.0/auth/login/local', {email, password})
 export const socialLogin = ({accessToken, provider}) => axios.post('/api/v1.0/auth/login/' + provider, {accessToken})
+export const socialRegister = ({
+    displayName,
+    provider, 
+    accessToken, 
+    initialMoney: { currency, index }
+}) => axios.post('/api/v1.0/auth/register/' + provider, {
+    displayName,
+    accessToken,
+    initialMoney: { currency, index }
+})
 export const checkLoginStatus = () => axios.get('/api/v1.0/auth/check')
 export const logout = () => axios.post('/api/v1.0/auth/logout')
 

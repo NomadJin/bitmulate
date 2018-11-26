@@ -40,30 +40,53 @@ class RegisterFormContainer extends Component {
   }
 
   handleSubmit = async () => {
-      const { nickname, currency, optionIndex, authForm, history, RegisterActions, UserActions } = this.props
-      const { email, password } = authForm.toJS()
-
-      if(nickname.length < 1) {
+    const { socialInfo, nickname, currency, optionIndex, authForm, history, RegisterActions, UserActions } = this.props
+      
+    if(nickname.length < 1) {
           RegisterActions.setError('닉네임을 입력하세요')
           return
-      }
+    }
 
-      try {
-          await RegisterActions.submit({
+    // social register
+    if(socialInfo) {
+        const { accessToken, provider } = socialInfo.toJS()
+
+        await RegisterActions.socialRegister({
             displayName: nickname,
-            email,
-            password,
+            provider,
+            accessToken,
             initialMoney: {
                 currency,
                 index: optionIndex
             }
         })
+
         const { result } = this.props
         UserActions.setUser(result)
         history.push('/')
-      } catch(e) {
+
+        return
+    }
+    
+    // local register
+    const { email, password } = authForm.toJS()
+        
+    try {
+        await RegisterActions.submit({
+        displayName: nickname,
+        email,
+        password,
+        initialMoney: {
+            currency,
+            index: optionIndex
+        }
+    })
+    const { result } = this.props
+    UserActions.setUser(result)
+    history.push('/')
+    } catch(e) {
         console.log(e)
-      }
+    }
 
   }
 

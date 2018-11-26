@@ -269,11 +269,11 @@ exports.socialLogin = async (ctx) => {
 exports.socialRegister = async (ctx) => {
     
     const { body } = ctx.request
+    const { provider } = ctx.params
     
     // check schema
     const schema = Joi.object({
         displayName: Joi.string().regex(/^[a-zA-Z0-9ㄱ-힣]{3,12}$/).required(),
-        provider: Joi.string().allow(['facebook', 'google']).required(),
         accessToken: Joi.string().required(), 
         initialMoney: Joi.object({
             currency: Joi.string().allow('KRW', 'USD', 'BTC').required(),
@@ -291,7 +291,6 @@ exports.socialRegister = async (ctx) => {
 
     const {
         displayName,
-        provider,
         accessToken,
         initialMoney
     } = body
