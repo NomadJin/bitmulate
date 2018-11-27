@@ -86,24 +86,24 @@ export default handleActions({
         type: PROVIDER_LOGIN,
         onSuccess: (state, action) => {
           const {
-              payload: accessToken,
-              meta: provider
+            payload: accessToken,
+            meta: provider
           } = action
-          
+
           return state.set('socialInfo', Map({
-              accessToken,
-              provider
+            accessToken,
+            provider
           }))
         }
     }),
     ...pender({
         type: SOCIAL_LOGIN,
         onSuccess: (state, action) => {
-            const { data: loginResult } =  action.payload
-            if(action.payload.status === 204) {
-                return state.set('redirectToRegister', true)
-            }
-            return state.set('loginResult', loginResult)
+          const { data: loginResult } = action.payload
+          if(action.payload.status === 204) {
+            return state.set('redirectToRegister', true)
+          }
+          return state.set('loginResult', loginResult)
         }
-    })
+  })
 }, initialState)

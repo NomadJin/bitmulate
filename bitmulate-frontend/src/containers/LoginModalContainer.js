@@ -103,19 +103,20 @@ class LoginModalContainer extends Component {
   }
 
   handleSocialLogin = async (provider) => {
-    const { AuthActions } = this.props
+    const { AuthActions, UserActions } = this.props
 
     try {
       await AuthActions.providerLogin(provider)
 
       const { socialInfo } = this.props
-
+      console.log(socialInfo)
       await AuthActions.socialLogin({
         provider,
         accessToken: socialInfo.get('accessToken')
       })
 
       const { redirectToRegister } = this.props
+      console.log(redirectToRegister)
 
       if(redirectToRegister) {
         this.handleClose()
@@ -123,9 +124,15 @@ class LoginModalContainer extends Component {
         setTimeout(() => {
           history.push('/register')
         }, 400)
+        return
       }
 
-      
+      const { loginResult } = this.props
+      storage.set('__BTM_USER__', loginResult)
+      UserActions.setUser(loginResult)
+      AuthActions.setError(null)
+      this.handleClose()
+
     } catch (e) {
       console.log(e)
     }

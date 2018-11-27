@@ -191,9 +191,15 @@ exports.socialLogin = async (ctx) => {
         return
     }
 
+    if(!profile) {
+        ctx.status = 403
+        return
+    }
+
     const {
         id, email   
     } = profile
+    console.log("profile : ", profile)
 
     // check account existancy
     let user = null
@@ -202,23 +208,24 @@ exports.socialLogin = async (ctx) => {
     } catch (e) {
         ctx.throw(e, 500)
     }
+    console.log("user : ", user)
 
     if(user) {
         // set user status
         try {
-            const bmtToken = await user.generateToken()
-            ctx.cookies.set('accessToken', bmtToken, {
-                httpOnly: true,
-                maxAge: 1000 * 60 * 60 * 24 * 7
-            })
+          const btmToken = await user.generateToken()
+          ctx.cookies.set('access_token', btmToken, {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24 * 7
+          })
         } catch (e) {
-            ctx.throw(e, 500)
-        }
+          ctx.throw(e, 500)
+        }     
         const { _id, displayName } = user
         ctx.body = {
-            displayName,
-            _id
-        }
+          displayName,
+          _id
+        }     
         return
     }
 
@@ -229,7 +236,7 @@ exports.socialLogin = async (ctx) => {
         } catch (e) {
             ctx.throw(e, 500)
         }
-
+        console.log("duplicated : ", duplicated)
         // if there is a duplicated email, merges the user account
         if(duplicated) {
             duplicated.social[provider] = {
@@ -241,21 +248,21 @@ exports.socialLogin = async (ctx) => {
             } catch (e) {
                 ctx.throw(e, 500)
             }
-            // TODO: set JWT and return account info
             try {
-                const bmtToken = await user.generateToken()
-                ctx.cookies.set('accessToken', bmtToken, {
+                const bmtToken = await duplicated.generateToken()
+                ctx.cookies.set('access_token', bmtToken, {
                     httpOnly: true,
                     maxAge: 1000 * 60 * 60 * 24 * 7
                 })
             } catch (e) {
                 ctx.throw(e, 500)
             }
-            const { _id, displayName } = user
+            const { _id, displayName } = duplicated
             ctx.body = {
                 displayName,
                 _id
             }
+            console.log(ctx.body)
         }
     }
 
