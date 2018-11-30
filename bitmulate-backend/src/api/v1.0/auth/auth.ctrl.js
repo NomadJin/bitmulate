@@ -199,7 +199,6 @@ exports.socialLogin = async (ctx) => {
     const {
         id, email   
     } = profile
-    console.log("profile : ", profile)
 
     // check account existancy
     let user = null
@@ -208,7 +207,6 @@ exports.socialLogin = async (ctx) => {
     } catch (e) {
         ctx.throw(e, 500)
     }
-    console.log("user : ", user)
 
     if(user) {
         // set user status
@@ -236,7 +234,6 @@ exports.socialLogin = async (ctx) => {
         } catch (e) {
             ctx.throw(e, 500)
         }
-        console.log("duplicated : ", duplicated)
         // if there is a duplicated email, merges the user account
         if(duplicated) {
             duplicated.social[provider] = {
@@ -262,15 +259,12 @@ exports.socialLogin = async (ctx) => {
                 displayName,
                 _id
             }
-            console.log(ctx.body)
         }
     }
 
-    // !exists -> 204 
     if(!user) {
         ctx.status = 204;
     }
-
 }
 
 exports.socialRegister = async (ctx) => {
@@ -377,15 +371,13 @@ exports.socialRegister = async (ctx) => {
     // generate accessToken
     try {
         const bmtToken = await user.generateToken()
-        ctx.cookies.set('accessToken', bmtToken, {
+        ctx.cookies.set('access_token', bmtToken, {
             httpOnly: true,
             maxAge: 1000 * 60 * 60 * 24 * 7
         })
     } catch (e) {
         ctx.throw(e, 500)
     }
-    // set cookie
-
 
 }
 

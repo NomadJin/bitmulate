@@ -109,14 +109,12 @@ class LoginModalContainer extends Component {
       await AuthActions.providerLogin(provider)
 
       const { socialInfo } = this.props
-      console.log(socialInfo)
       await AuthActions.socialLogin({
         provider,
         accessToken: socialInfo.get('accessToken')
       })
 
       const { redirectToRegister } = this.props
-      console.log(redirectToRegister)
 
       if(redirectToRegister) {
         this.handleClose()

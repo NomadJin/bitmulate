@@ -66,7 +66,7 @@ User.statics.findExistancy = function({ displayName, email }) {
 }
 
 User.statics.findSocialId = function({provider, id}) {
-    const key = 'social.${provider}.id'
+    const key = `social.${provider}.id`
 
     return this.findOne({
         [key]: id

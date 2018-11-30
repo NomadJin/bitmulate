@@ -105,5 +105,5 @@ export default handleActions({
           }
           return state.set('loginResult', loginResult)
         }
-  })
+    })
 }, initialState)
